@@ -1,1 +1,1 @@
-# Care Deployment Config Template
+# Care Deployment Configuration Templates
