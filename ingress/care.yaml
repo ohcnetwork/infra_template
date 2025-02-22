@@ -4,44 +4,48 @@ metadata:
   name: care-ingress
   namespace: default
   annotations:
-    kubernetes.io/ingress.class: nginx
-    ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
 spec:
+  ingressClassName: nginx
   tls:
-  - hosts:
-      - care.demo.example.in
-      - careapi.demo.example.in
-      - metabase.demo.example.in
-    secretName: care-tls
+    - hosts:
+        - care.demo.example.in
+        - careapi.demo.example.in
+        - metabase.demo.example.in
+      secretName: care-tls
+
   rules:
     - host: care.demo.example.in
       http:
         paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: care-nginx-production
-              port: 
-                number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: care-nginx-production
+                port:
+                  number: 80
+
     - host: careapi.demo.example.in
       http:
         paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: care-nginx-production
-              port: 
-                number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: care-nginx-production
+                port:
+                  number: 80
+
     - host: metabase.demo.example.in
       http:
         paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: care-nginx-production
-              port: 
-                number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: care-nginx-production
+                port:
+                  number: 80

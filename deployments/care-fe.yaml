@@ -2,7 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: care-fe-production-deployment
+
 spec:
+  selector:
+    matchLabels:
+      app: care-fe-production
+
   template:
     metadata:
       labels:
@@ -10,16 +15,15 @@ spec:
     spec:
       containers:
         - name: care-fe
-          image: ghcr.io/coronasafe/care_fe:production-latest
+          image: ghcr.io/ohcnetwork/care_fe:production-latest
           imagePullPolicy: Always
           env:
             - name: deployment-version
               value: "_BUILD_NUMBER_"
           ports:
-            - containerPort: 80
-              name: care-fe-prod
+            - name: care-fe-prod
+              containerPort: 80
               protocol: TCP
-
           # resources:
           #   requests:
           #     memory: "200Mi"
@@ -28,9 +32,9 @@ spec:
           #     memory: "300Mi"
           #     cpu: "100m"
           volumeMounts:
-            - mountPath: /usr/share/nginx/html/config.json
+            - name: care-fe-production
+              mountPath: /usr/share/nginx/html/config.json
               subPath: config.json
-              name: care-fe-production
       volumes:
         - name: care-fe-production
           configMap:
@@ -38,6 +42,3 @@ spec:
             items:
               - key: config.json
                 path: config.json
-  selector:
-    matchLabels:
-      app: care-fe-production

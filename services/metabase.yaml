@@ -4,7 +4,8 @@ metadata:
   name: metabase
   labels:
     app: metabase
-    env: staging
+    env: production
+
 spec:
   ports:
     - port: 3000

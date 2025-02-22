@@ -4,20 +4,22 @@ metadata:
   name: care-production
   labels:
     app: care
-    env: staging
+    env: production
     namespace: default
+
 data:
   POSTGRES_DB: 'care'
   POSTGRES_USER: 'postgres'
   POSTGRES_HOST: ''
   POSTGRES_PORT: '5432'
+  POSTGRES_PASSWORD: ''
   DJANGO_SETTINGS_MODULE: 'config.settings.production'
   DJANGO_SECURE_SSL_REDIRECT: 'False'
   USE_S3: 'False'
   AWS_STORAGE_BUCKET_NAME: 'care-patient-data-private-bucket'
   CSRF_TRUSTED_ORIGINS: '["http://care-django-production", "https://care.demo.example.in", "https://careapi.demo.example.in"]'
   DJANGO_ALLOWED_HOSTS: '["care-django-production", "care.demo.example.in", "careapi.demo.example.in"]'
-  RATE_LIMIT: "5/10m"
-  MAINTENANCE_MODE: "0"
-  CLOUD_PROVIDER: "GCP"
-  CLOUD_REGION: "asia-south1"
+  RATE_LIMIT: '5/10m'
+  MAINTENANCE_MODE: '0'
+  CLOUD_PROVIDER: 'GCP'
+  CLOUD_REGION: 'asia-south1'

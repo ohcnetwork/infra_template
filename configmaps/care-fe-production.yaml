@@ -6,25 +6,26 @@ metadata:
     app: care-fe-production
     env: production
     namespace: default
+
 data:
   config.json: |
     {
       "dashboard_url": "https://metabase.demo.example.in",
-      "github_url": "https://github.com/coronasafe",
-      "coronasafe_url": "https://coronasafe.network?ref=care",
+      "github_url": "https://github.com/ohcnetwork",
+      "coronasafe_url": "https://ohc.network/care",
       "site_url": "care.demo.example.in",
       "analytics_server_url": "",
       "header_logo": {
-          "light":"https://cdn.coronasafe.network/header_logo.png",
-          "dark":"https://cdn.coronasafe.network/header_logo.png"
+        "light": "https://cdn.ohc.network/header_logo.png",
+        "dark": "https://cdn.ohc.network/header_logo.png"
       },
       "main_logo": {
-          "light":"https://cdn.coronasafe.network/10bedicu_logo.png",
-          "dark":"https://cdn.coronasafe.network/10bedicu_logo.png"
+        "light": "https://cdn.ohc.network/10bedicu_logo.png",
+        "dark": "https://cdn.ohc.network/10bedicu_logo.png"
       },
       "state_logo": {
-            "light":"https://cdn.coronasafe.network/10bedicu_logo.png",
-            "dark":"https://cdn.coronasafe.network/10bedicu_logo.png"
+        "light": "https://cdn.ohc.network/10bedicu_logo.png",
+        "dark": "https://cdn.ohc.network/10bedicu_logo.png"
       },
       "gmaps_api_key": "",
       "gov_data_api_key": "",

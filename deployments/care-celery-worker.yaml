@@ -2,7 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: care-production-celery-worker
+
 spec:
+  selector:
+    matchLabels:
+      app: care-production-celery-worker
+
   template:
     metadata:
       labels:
@@ -11,21 +16,14 @@ spec:
         env: production
         namespace: default
     spec:
-#      imagePullSecrets:
-#        - name: githubreg
+      # imagePullSecrets:
+      #   - name: githubreg
       containers:
         - name: care
-          image: ghcr.io/coronasafe/care:production-latest
+          image: ghcr.io/ohcnetwork/care:production-latest
           imagePullPolicy: Always
-          # resources:
-          #   requests:
-          #     memory: "500Mi"
-          #     cpu: "200m"
-          #   limits:
-          #     memory: "1Gi"
-          #     cpu: "200m"
-          command: [ "/bin/bash", "-c", "--" ]
-          args: [ "/app/celery_worker.sh" ]
+          command: ["/bin/bash", "-c", "--"]
+          args: ["/app/celery_worker.sh"]
           envFrom:
             - configMapRef:
                 name: care-production
@@ -36,19 +34,23 @@ spec:
               value: "20200331015742"
             - name: deployment-version
               value: "_BUILD_NUMBER_"
-          volumeMounts:
-            - name: newrelic-ini
-              mountPath: /etc/newrelic.ini
-              subPath: newrelic.ini
-              readOnly: true
-      volumes:
-        - name: newrelic-ini
-          secret:
-            secretName: care-production
-            defaultMode: 0444
-            items:
-              - key: NEWRELIC_INI
-                path: newrelic.ini
-  selector:
-    matchLabels:
-      app: care-production-celery-worker
+          # resources:
+          #   requests:
+          #     memory: "500Mi"
+          #     cpu: "200m"
+          #   limits:
+          #     memory: "1Gi"
+          #     cpu: "200m"
+      #     volumeMounts:
+      #       - name: newrelic-ini
+      #         mountPath: /etc/newrelic.ini
+      #         subPath: newrelic.ini
+      #         readOnly: true
+      # volumes:
+      #   - name: newrelic-ini
+      #     secret:
+      #       secretName: care-production
+      #       defaultMode: 0444
+      #       items:
+      #         - key: NEWRELIC_INI
+      #           path: newrelic.ini

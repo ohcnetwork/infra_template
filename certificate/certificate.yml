@@ -3,12 +3,13 @@ kind: Certificate
 metadata:
   name: care-tls
   namespace: default
+
 spec:
   secretName: care-tls
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
   dnsNames:
-  - care.demo.example.in
-  - careapi.demo.example.in
-  - metabase.demo.example.in
+    - care.demo.example.in
+    - careapi.demo.example.in
+    - metabase.demo.example.in

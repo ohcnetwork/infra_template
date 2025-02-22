@@ -6,6 +6,7 @@ metadata:
     application: care-django
     environment: production
     namespace: default
+
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
