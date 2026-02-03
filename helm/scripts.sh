@@ -2,7 +2,7 @@
 helm upgrade --install ingress-nginx ingress-nginx \
  --repo https://kubernetes.github.io/ingress-nginx \
  --namespace ingress-nginx --create-namespace \
- --set controller.service.loadBalancerIP=34.100.159.155
+ # --set controller.service.loadBalancerIP=34.100.159.155
 
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
