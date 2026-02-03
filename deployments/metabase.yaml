@@ -2,7 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: metabase-production-deployment
+
 spec:
+  selector:
+    matchLabels:
+      app: metabase
+
   template:
     metadata:
       labels:
@@ -22,12 +27,9 @@ spec:
           #     memory: "4Gi"
           #     cpu: "1"
           ports:
-            - containerPort: 3000
-              name: metabase
+            - name: metabase
+              containerPort: 3000
               protocol: TCP
           envFrom:
-          - secretRef:
-              name: metabase-production-secrets
-  selector:
-    matchLabels:
-      app: metabase
+            - secretRef:
+                name: metabase-production-secrets

@@ -2,40 +2,42 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: nginx-conf-production
+
 data:
   nginx.conf: |
     user nginx;
-    worker_processes  1;
-    error_log  /dev/stdout;
-    events {
-      worker_connections  10240;
-    }
-    http {
+    worker_processes 1;
+    error_log /dev/stdout;
 
-      access_log  /dev/stdout;
+    events {
+      worker_connections 10240;
+    }
+
+    http {
+      access_log /dev/stdout;
 
       server {
         listen 80;
         server_name careapi.demo.example.in;
         client_max_body_size 50M;
-        # Hack to enforce SSL.
 
-        if ($http_x_forwarded_proto != "https") {
-          return 301 https://$host$request_uri;
-        }
-        # add_header Access-Control-Allow-Origin "*";
+        # if ($http_x_forwarded_proto != "https") {
+        #   return 301 https://$host$request_uri;
+        # }
+
         add_header X-XSS-Protection "1; mode=block";
         add_header X-Frame-Options "SAMEORIGIN";
         add_header X-Content-Type-Options nosniff;
         add_header Referrer-Policy "no-referrer, strict-origin-when-cross-origin";
-        add_header Feature-Policy "geolocation 'self' ";
+        add_header Feature-Policy "geolocation 'self'";
+        add_header Access-Control-Allow-Origin "'https://*.example.in https://*.ohc.network' always";
+
         add_header Powered-By "Open HealthCare Network (ohc.network)";
-        add_header Support-Email "info@coronasafe.network";
-        add_header Source-Code "github.com/coronasafe";
+        add_header Support-Email "info@ohc.network";
+        add_header Source-Code "github.com/ohcnetwork";
         add_header Licence-Type "MIT";
-        
-        add_header Volunteer "volunteers.coronasafe.network";
-        add_header Collaborate-On "slack.coronasafe.in";
+        add_header Volunteer "volunteers.ohc.network";
+        add_header Collaborate-On "slack.ohc.network";
 
         access_log /dev/stdout;
         error_log /dev/stdout;
@@ -51,24 +53,25 @@ data:
       server {
         listen 80;
         server_name care.demo.example.in;
-        # Hack to enforce SSL.
         client_max_body_size 50M;
-        if ($http_x_forwarded_proto != "https") {
-          return 301 https://$host$request_uri;
-        }
+
+        # if ($http_x_forwarded_proto != "https") {
+        #   return 301 https://$host$request_uri;
+        # }
+
         add_header X-XSS-Protection "1; mode=block";
         add_header X-Frame-Options "SAMEORIGIN";
         add_header X-Content-Type-Options nosniff;
         add_header Referrer-Policy "no-referrer, strict-origin-when-cross-origin";
-        add_header Feature-Policy "geolocation 'self' ";
+        add_header Feature-Policy "geolocation 'self'";
+        add_header Access-Control-Allow-Origin "'https://*.example.in https://*.ohc.network' always";
+
         add_header Powered-By "Open HealthCare Network (ohc.network)";
-        add_header Support-Email "info@coronasafe.network";
-        add_header Source-Code "github.com/coronasafe";
+        add_header Support-Email "info@ohc.network";
+        add_header Source-Code "github.com/ohcnetwork";
         add_header Licence-Type "MIT";
-        
-        add_header Volunteer "volunteers.coronasafe.network";
-        add_header Collaborate-On "slack.coronasafe.in";
-        add_header Access-Control-Allow-Origin "'https://*.example.in https://*.coronasafe.network' always";
+        add_header Volunteer "volunteers.ohc.network";
+        add_header Collaborate-On "slack.ohc.network";
 
         access_log /dev/stdout;
         error_log /dev/stdout;
@@ -84,31 +87,32 @@ data:
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_set_header Host $http_host;
           proxy_redirect off;
-          proxy_pass http://care-fe-staging-production;
+          proxy_pass http://care-fe-staging-production:80;
         }
       }
 
       server {
         listen 80;
-        server_name metabase.demo.example.in ;
-        # Hack to enforce SSL.
+        server_name metabase.demo.example.in;
         client_max_body_size 50M;
-        if ($http_x_forwarded_proto != "https") {
-          return 301 https://$host$request_uri;
-        }
+
+        # if ($http_x_forwarded_proto != "https") {
+        #   return 301 https://$host$request_uri;
+        # }
+
         add_header X-XSS-Protection "1; mode=block";
         add_header X-Frame-Options "SAMEORIGIN";
         add_header X-Content-Type-Options nosniff;
         add_header Referrer-Policy "no-referrer, strict-origin-when-cross-origin";
-        add_header Feature-Policy "geolocation 'self' ";
+        add_header Feature-Policy "geolocation 'self'";
+        add_header Access-Control-Allow-Origin "'https://*.example.in https://*.ohc.network' always";
+
         add_header Powered-By "Open HealthCare Network (ohc.network)";
-        add_header Support-Email "info@coronasafe.network";
-        add_header Source-Code "github.com/coronasafe";
+        add_header Support-Email "info@ohc.network";
+        add_header Source-Code "github.com/ohcnetwork";
         add_header Licence-Type "MIT";
-        
-        add_header Volunteer "volunteers.coronasafe.network";
-        add_header Collaborate-On "slack.coronasafe.in";
-        add_header Access-Control-Allow-Origin "'https://*.example.in https://*.coronasafe.network' always";
+        add_header Volunteer "volunteers.ohc.network";
+        add_header Collaborate-On "slack.ohc.network";
 
         access_log /dev/stdout;
         error_log /dev/stdout;
@@ -121,4 +125,3 @@ data:
         }
       }
     }
-

@@ -2,6 +2,7 @@ apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: care-fe-production-autoscaler
+
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
